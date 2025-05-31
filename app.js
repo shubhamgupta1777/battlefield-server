@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
+const serverless = require('serverless-http');
 const app = express();
-const serverInfoRoute = require("./routes/serverInfo");
 
-app.use("/api", serverInfoRoute);
-
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.get('/api/server-info', (req, res) => {
+  res.json({ message: 'Battlefield server info' });
 });
+
+// Export the handler for Vercel
+module.exports.handler = serverless(app);
